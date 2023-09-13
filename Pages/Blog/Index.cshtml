@@ -6,16 +6,7 @@
 }
 
 <h1>Danh sách bài viết</h1>
-@{
-    var pagingModel = new RAZOR_EF_06_ArticleManagement.Helpers.PagingModel()
-            {
-                currentPage = Model.currenPage,
-                countPage = Model.countPage,
-                generateUrl = (int? p) => Url.Page("/Blog/Index", new { p = p })
 
-    };
-}
-<partial name="_Paging" model="@pagingModel" />
 
 <div class="row">
     <p class="p-4">
@@ -70,3 +61,14 @@
 }
     </tbody>
 </table>
+
+@{
+    var pagingModel = new RAZOR_EF_06_ArticleManagement.Helpers.PagingModel()
+            {
+                currentPage = Model.currenPage,
+                countPage = Model.countPage,
+                generateUrl = (int? p) => Url.Page("/Blog/Index", new { p = p })
+
+            };
+}
+<partial name="_Paging" model="@pagingModel" />
