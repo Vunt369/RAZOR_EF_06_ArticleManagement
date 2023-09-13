@@ -1,0 +1,72 @@
+﻿@page
+@model RAZOR_EF_06_ArticleManagement.Pages_Blog.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Danh sách bài viết</h1>
+@{
+    var pagingModel = new RAZOR_EF_06_ArticleManagement.Helpers.PagingModel()
+            {
+                currentPage = Model.currenPage,
+                countPage = Model.countPage,
+                generateUrl = (int? p) => Url.Page("/Blog/Index", new { p = p })
+
+    };
+}
+<partial name="_Paging" model="@pagingModel" />
+
+<div class="row">
+    <p class="p-4">
+        <a asp-page="Create" class="btn btn-primary">Tạo mới bài viết</a>
+    </p>
+ <form  method="get" asp-page="./Index">
+        <div>
+            <label>Tìm kiếm:</label>
+            <input type="text" name="SearchValue" value="" />
+            <button class="btn btn-primary" type="submit">
+                <i class="bi bi-search"></i> Tìm kiếm
+            </button>
+        </div>
+ </form>
+</div>
+@{
+    int i = 0;
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                STT
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Article[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Article[0].Created)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Article) {
+        <tr>
+            <td>
+                @(++i)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Created)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Chỉnh sửa</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Chi tiết</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Xóa</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

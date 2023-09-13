@@ -1,0 +1,22 @@
+﻿@page
+@model IndexModel
+@using RAZOR_EF_06_ArticleManagement.Models
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+@{
+    var posts = ViewData["posts"] as List<Article>;
+    <div class="list-group alert alert-danger">
+        <ul>
+            @foreach (var p in posts)
+            {
+                <li>@p.Title</li>
+            }
+        </ul>
+    </div>
+}
